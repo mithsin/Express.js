@@ -1,36 +1,37 @@
-var friends = require("../data/friends");
+//request data.friends
+var friendslove = require("../data/friends");
 
+//export module
 module.exports = function(app) {
-//get all info
-app.get('/api/friends', function(req, res){
-    res.json(friends);
-    });
 
-//search specific friend
-app.get('/api/:friends?', function(req, res){
-    var chosen = req.params.friends;
-    
-    if(chosen){
-        console.log(chosen);
-    
-        for(var i = 0 ; i < friends.length; i++){
-            if(chosen === friends[i].friendName){
-                return res.json(friends[i]);
-            }                                   
-        }
-        return res.json(false);
-     }
-    return res.json(friends);
-   });
+app.get('/api/friends', function(req, res){
+    res.json(friendslove);
+    });
 
 // Create New friend - takes in JSON input
   app.post("/api/friends", function(req, res) {
-
   var newfriend = req.body;
-  newfriend.friendName = newfriend.name.replace(/\s+/g, "").toLowerCase();
-  console.log(newfriend);
-  characters.push(newfriend);
-  res.json(newfriend);
+      
+      friendslove.push(newfriend);
+      res.send(friendslove[1]);
 });
-    
+
+//calculation and sorting out the matching info 
+/*function calculate(allFriend){
+    var friArr = [];
+    for (var i = 0 ; i < allFriend.length; i++){
+        friArr.push(friendScore(allFriend[i]));
+    }
+console.log(friArr);
 };
+    
+function friendScore(seleFriend){
+    var scoreA= 0;
+    for (var i = 0 ; i < seleFriend.scores.length; i++){
+        scoreA += seleFriend.scores[i];
+
+    }
+console.log(scoreA);
+    }  */  
+};
+
